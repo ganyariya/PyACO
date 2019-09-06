@@ -1,4 +1,5 @@
 from Ant import Ant
+from copy import deepcopy
 
 
 class Colony:
@@ -8,6 +9,30 @@ class Colony:
         self.m_graph = graph
         self.m_ants = [Ant(self.m_graph, self.m_parameters) for i in range(self.m_num_of_ants)]
 
-    def construct_ants(self):
-        for i in range(self.m_num_of_ants):
-            self.m_ants[i].constrct_path()
+    def update_colony(self):
+        self.__construct_ants()
+        self.__calc_next_pheromones()
+
+    def get_best_ant_path(self):
+        length = 1e20
+        path = []
+        for ant in self.m_ants:
+            if ant.calc_all_path_length() < length:
+                length = ant.calc_all_path_length()
+                path = deepcopy(ant.m_visited_path)
+        return [length, path]
+
+    def reset_colony(self):
+        for ant in self.m_ants:
+            ant.reset_ant()
+
+    # 蟻の移動
+    def __construct_ants(self):
+
+        for ant in self.m_ants:
+            ant.construct_path()
+
+    # tサイクルの発生フェロモン
+    def __calc_next_pheromones(self):
+        for ant in self.m_ants:
+            ant.calc_next_pheromone()
