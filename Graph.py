@@ -36,6 +36,13 @@ class Graph:
         self.m_edge_next_pheromone = [[0 for j in range(self.m_num_of_vertexes)] for i in
                                       range(self.m_num_of_vertexes)]
 
+    def reset_graph_when_stagnation(self):
+        for i in range(self.m_num_of_vertexes):
+            for j in range(self.m_num_of_vertexes):
+                if i < j:
+                    self.m_edge_pheromone[i][j] = self.m_parameters.mC_Q / self.m_edge_length[i][j]
+                    self.m_edge_pheromone[j][i] = self.m_parameters.mC_Q / self.m_edge_length[i][j]
+
     def __calc_edge_length(self, p1, p2):
         dx = (p1[0] - p2[0]) ** 2
         dy = (p1[1] - p2[1]) ** 2

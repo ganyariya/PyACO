@@ -1,6 +1,7 @@
 from Parameters import Parameters
 from Colony import Colony
 from Graph import Graph
+import plot
 
 
 class ACOSolver:
@@ -11,12 +12,30 @@ class ACOSolver:
         self.m_graph = Graph(self.mC_parameters)
         self.m_colony = Colony(self.m_graph, self.mC_parameters)
         self.m_best_ant = None
+        self.m_super_ant = None
+        self.m_cnt_super_not_change = 0
+        plot.init_plot()
 
     def run_aco(self):
         for T in range(self.mC_parameters.mC_max_iterations):
             self.__update_aco()
             self.__reset_aco()
-            print(self.m_best_ant[0], self.m_best_ant[1])
+            if self.m_super_ant is None:
+                self.m_super_ant = self.m_best_ant
+            if self.m_super_ant[0] > self.m_best_ant[0]:
+                self.m_super_ant = self.m_best_ant
+            else:
+                self.m_cnt_super_not_change += 1
+
+            if self.m_cnt_super_not_change > 30:
+                self.reset_pheromones()
+                self.m_cnt_super_not_change = 0
+
+            print(T, self.m_super_ant)
+            plot.play_plot(self.m_graph.m_coordinates, self.m_super_ant[1], self.m_best_ant[1])
+
+    def reset_pheromones(self):
+        self.m_graph.reset_graph_when_stagnation()
 
     def __update_aco(self):
         self.m_colony.update_colony()
