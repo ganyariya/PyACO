@@ -1,0 +1,12 @@
+Metadata-Version: 1.1
+Name: PyACO
+Version: 1.0
+Summary: Ant Colony Optimization in python
+Home-page: https://github.com/Ganariya/PyACO
+Author: ganariya
+Author-email: UNKNOWN
+License: MIT
+Description: This Package is able to use ACO in Python.
+Keywords: ACO python
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.6
