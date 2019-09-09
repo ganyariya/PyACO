@@ -26,13 +26,11 @@ class Colony:
         for ant in self.m_ants:
             ant.reset_ant()
 
-    # 蟻の移動
     def __construct_ants(self):
 
         for ant in self.m_ants:
             ant.construct_path()
 
-    # tサイクルの発生フェロモン
     def __calc_next_pheromones(self):
         for ant in self.m_ants:
             ant.calc_next_pheromone()

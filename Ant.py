@@ -16,9 +16,13 @@ class Ant:
         self.m_visited_vertex[self.m_init_vertex] = True
         for i in range(self.m_num_of_vertex - 1):
             v = self.m_visited_path[-1]
-            to_vertexes, to_prob = self.calc_prob_from_v(v)
-            random_p = random.uniform(0.0, 0.999999999)
-            to = to_vertexes[bisect.bisect_left(to_prob, random_p)]
+            to_vertexes, to_prob = self.__calc_prob_from_v(v)
+            to = -1
+            if random.random() < self.m_parameters.mC_ant_prob_random:
+                to = to_vertexes[random.randint(0, len(to_vertexes) - 1)]
+            else:
+                random_p = random.uniform(0.0, 0.999999999)
+                to = to_vertexes[bisect.bisect_left(to_prob, random_p)]
             self.m_visited_path.append(to)
             self.m_visited_vertex[to] = True
 
@@ -34,7 +38,7 @@ class Ant:
             length += self.m_graph.m_edge_length[self.m_visited_path[i]][self.m_visited_path[i + 1]]
         return length
 
-    def calc_prob_from_v(self, v):
+    def __calc_prob_from_v(self, v):
         sumV = 0
         to_vertexes = []
         to_pheromones = []

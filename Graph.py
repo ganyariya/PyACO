@@ -19,7 +19,7 @@ class Graph:
             self.m_coordinates[i] = (random.uniform(0, 1000), random.uniform(0, 1000))
         for i in range(self.m_num_of_vertexes):
             for j in range(self.m_num_of_vertexes):
-                self.m_edge_length[i][j] = self.__calc_edge_length(self.m_coordinates[i], self.m_coordinates[j])
+                self.m_edge_length[i][j] = Graph.__calc_edge_length(self.m_coordinates[i], self.m_coordinates[j])
         for i in range(self.m_num_of_vertexes):
             for j in range(self.m_num_of_vertexes):
                 if i < j:
@@ -43,7 +43,8 @@ class Graph:
                     self.m_edge_pheromone[i][j] = self.m_parameters.mC_Q / self.m_edge_length[i][j]
                     self.m_edge_pheromone[j][i] = self.m_parameters.mC_Q / self.m_edge_length[i][j]
 
-    def __calc_edge_length(self, p1, p2):
+    @staticmethod
+    def __calc_edge_length(p1, p2):
         dx = (p1[0] - p2[0]) ** 2
         dy = (p1[1] - p2[1]) ** 2
         return math.sqrt(dx + dy)

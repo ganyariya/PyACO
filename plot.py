@@ -12,7 +12,7 @@ def init_plot():
     plt.ylabel("y")
 
 
-def play_plot(coordinates, super_path, best_path):
+def play_plot(coordinates, super_path, best_path, plot_time):
     X = [xy[0] for xy in coordinates]
     Y = [xy[1] for xy in coordinates]
     plt.plot(X, Y, "o", c="red")
@@ -27,5 +27,5 @@ def play_plot(coordinates, super_path, best_path):
     plt.plot(best_x, best_y, c="blue", ls=":", alpha=0.7)
 
     plt.draw()
-    plt.pause(1)
+    plt.pause(plot_time)
     plt.cla()
