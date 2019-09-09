@@ -1,7 +1,7 @@
-from Parameters import Parameters
-from Colony import Colony
-from Graph import Graph
-import plot
+from PyACO.Parameters import Parameters
+from PyACO.Colony import Colony
+from PyACO.Graph import Graph
+from PyACO import plot
 
 
 class ACOSolver:

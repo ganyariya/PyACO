@@ -1,4 +1,4 @@
-from Ant import Ant
+from PyACO.Ant import Ant
 from copy import deepcopy
 
 
