@@ -17,7 +17,10 @@ class ACOSolver:
         self.m_cnt_super_not_change = 0
         plot.init_plot()
 
+
     def run_aco(self):
+
+        # 規定回数実行する
         for T in range(self.mC_parameters.mC_max_iterations):
             self.__update_aco()
             self.__reset_aco()
@@ -28,6 +31,7 @@ class ACOSolver:
             else:
                 self.m_cnt_super_not_change += 1
 
+            # 答えが局所解に陥ったら強制的にフェロモンを初期化する
             if self.m_cnt_super_not_change > self.mC_parameters.mC_super_not_change:
                 self.reset_pheromones()
                 self.m_cnt_super_not_change = 0
